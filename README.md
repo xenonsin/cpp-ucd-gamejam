@@ -1,4 +1,4 @@
-# cpp-ucd-gamejam
+# Poly Party
 Collection of mini games created by the members of the CPP Game Design and Development Club!
 
 Need 4 controllers!
