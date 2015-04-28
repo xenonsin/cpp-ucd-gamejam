@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
 	        {
 	            Application.LoadLevel(Random.Range(1, 4));
                 //Application.LoadLevel(1);
+	            inGame = true;
 	        }
 
             DisplayBoardScore();
@@ -148,6 +149,7 @@ public class GameManager : MonoBehaviour
     public void LoadBoardLevel()
     {
         Application.LoadLevel(0);
+        inGame = false;
     }
 
     public int GetScore(string pl)
