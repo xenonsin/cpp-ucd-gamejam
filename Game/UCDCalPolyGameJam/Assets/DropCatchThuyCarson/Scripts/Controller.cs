@@ -39,17 +39,18 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (score >= 100)
+        if (score >= 50)
         {
             //Application.LoadLevel("gameover");
-            GameManager.Instance.IncrementScore(player);
-            Application.LoadLevel(0);
+            GameManager.Instance.EndRoundWithWinner(player);
         }
 
         if (Input.GetButtonDown(player + " Action"))
         {
             Jump();
         }
+
+        PrintScore();
     }
 
     void Jump()
@@ -101,6 +102,7 @@ public class Controller : MonoBehaviour
 
     void PrintScore()
     {
-        Debug.Log(player +" Score: " + score);
+        //Debug.Log(player +" Score: " + score);
+        GameManager.Instance.SetText(player,score);
     }
 }

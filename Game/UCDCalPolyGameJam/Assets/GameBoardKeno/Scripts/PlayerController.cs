@@ -62,8 +62,7 @@ public class PlayerController : MonoBehaviour
     {
         if (col.gameObject.tag == "finish")
         {
-            GameManager.Instance.IncrementScore(player);
-            Application.LoadLevel(0);
+            GameManager.Instance.EndRoundWithWinner(player);
         }
     }
 }

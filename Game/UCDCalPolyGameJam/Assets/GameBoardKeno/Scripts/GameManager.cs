@@ -123,6 +123,20 @@ public class GameManager : MonoBehaviour
         LoadBoardLevel();
     }
 
+    public void RestartGame()
+    {
+        ResetScore();
+        LoadBoardLevel();
+    }
+
+    public void ResetScore()
+    {
+        foreach (var entry in playerList)
+        {
+            playerList[entry.Key] = 0;
+        }
+    }
+
     public void SetText(string pl, int n)
     {
         if (scoreList.ContainsKey(pl))
@@ -165,6 +179,6 @@ public class GameManager : MonoBehaviour
 
     void Win()
     {
-        
+        Application.LoadLevel(4);
     }
 }
