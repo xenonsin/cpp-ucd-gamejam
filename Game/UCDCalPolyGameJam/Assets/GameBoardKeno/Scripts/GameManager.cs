@@ -8,7 +8,21 @@ public class GameManager : MonoBehaviour
 {
 
 
-    public static GameManager Instance;
+    private static GameManager _instance;
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<GameManager>();
+                DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
+
 
     private bool win;
     private bool inGame;
@@ -20,36 +34,40 @@ public class GameManager : MonoBehaviour
     public Text P3Text;
     public Text P4Text;
 
+    public bool test;
+
     void OnEnable()
     {
         
     }
 
-    void OnDisable()
+
+    void Start()
     {
-        Instance = null;
+        playerList.Add("p1", 0);
+        playerList.Add("p2", 0);
+        playerList.Add("p3", 0);
+        playerList.Add("p4", 0);
+        scoreList.Add("p1", P1Text);
+        scoreList.Add("p2", P2Text);
+        scoreList.Add("p3", P3Text);
+        scoreList.Add("p4", P4Text);
     }
 
 	// Use this for initialization
 	void Awake () {
-	    if (Instance == null)
+	    if (_instance == null)
 	    {
-	        Instance = this;
-	        playerList.Add("p1", 0);
-	        playerList.Add("p2", 0);
-	        playerList.Add("p3", 0);
-	        playerList.Add("p4", 0);
-	        scoreList.Add("p1", P1Text);
-	        scoreList.Add("p2", P2Text);
-	        scoreList.Add("p3", P3Text);
-	        scoreList.Add("p4", P4Text);
+            _instance = this;
 
+            DontDestroyOnLoad(this);
 	    }
 	    else
 	    {
-	        Destroy(gameObject);
+            if (this != Instance)
+	            Destroy(this.gameObject);
 	    }
-	    DontDestroyOnLoad(gameObject);
+	    
 	}
 	
 	// Update is called once per frame
@@ -69,7 +87,18 @@ public class GameManager : MonoBehaviour
             DisplayBoardScore();
 	    }
 
+	    if (test)
+	    {
+	        if (Input.GetKeyDown(KeyCode.Space))
+                Test();
+	    }
+
 	}
+
+    void Test()
+    {
+        Application.LoadLevel(Random.Range(1,4));
+    }
 
     public void SetInGame()
     {
@@ -83,7 +112,15 @@ public class GameManager : MonoBehaviour
             playerList[pl]++;
         }
 
+    }
+
+    public void EndRoundWithWinner(string pl)
+    {
+        IncrementScore(pl);
+
         CheckWin();
+
+        LoadBoardLevel();
     }
 
     public void SetText(string pl, int n)
@@ -92,6 +129,11 @@ public class GameManager : MonoBehaviour
         {
             scoreList[pl].text = n.ToString();
         }
+    }
+
+    public void LoadBoardLevel()
+    {
+        Application.LoadLevel(0);
     }
 
     public int GetScore(string pl)

@@ -10,8 +10,8 @@ public class GrabCandy : MonoBehaviour {
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
         float random = Random.value;
-        Debug.Log("Cos 0: " + Mathf.Cos(0));
-        Debug.Log( random + " : " + Mathf.Cos(random * Mathf.PI));
+        //Debug.Log("Cos 0: " + Mathf.Cos(0));
+        //Debug.Log( random + " : " + Mathf.Cos(random * Mathf.PI));
         transform.position = new Vector3(transform.position.x - range * random, transform.position.y - ( 1 - Mathf.Sin(random*Mathf.PI)) * 3);
         rb.velocity = new Vector2(0, 5);
 	}

@@ -13,8 +13,11 @@ public class GameManagerScript : MonoBehaviour {
             GameObject go = GameObject.FindGameObjectWithTag("Player");
             PlayerMovement pc;
             pc = go.GetComponent<PlayerMovement>();
-            GameManager.Instance.IncrementScore(pc.player);
-            Application.LoadLevel(0);
+            GameManager.Instance.EndRoundWithWinner(pc.player);
+        }
+        else if (playercounts.Length == 0)
+        {
+            GameManager.Instance.LoadBoardLevel();
         }
 	}
 }
